@@ -30,17 +30,22 @@ table = overview_row.table({
     "LangChain Experiments": [getExperimentsCount()]
 })
 
-col1, col2, col3 = navigation_row.columns(3)
+col_system, col_prod, col_user, col_releases = \
+    navigation_row.columns(4)
 
-with col1:
-    col1.subheader('Production Sessions')
-    col1.board_link('production.py', 'Overview')
-with col2:
-    col2.subheader('User Analytics')
-    col2.board_link('analytics.py', 'User Page')
-with col3:
-    col3.subheader("Releases")
-    col3.board_link('dev/release.py', 'Releases')
+
+with col_system:
+    col_system.subheader('System Lineage')
+    col_system.board_link('_system_lineage.py', 'Full System Lineage')
+with col_prod:
+    col_prod.subheader('Production Sessions')
+    col_prod.board_link('production.py', 'Production Overview')
+with col_user:
+    col_user.subheader('User Analytics')
+    col_user.board_link('analytics.py', 'User Page')
+with col_releases:
+    col_releases.subheader("Releases")
+    col_releases.board_link('dev/release.py', 'Releases')
 
 
 metrics_row.header('Token Usage per User Session')
