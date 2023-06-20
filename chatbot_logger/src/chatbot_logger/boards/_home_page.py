@@ -21,7 +21,7 @@ def getExperimentsCount():
 
 ui.header('ChatBot Logger HomePage')
 
-overview_row, navigation_row = ui.rows(2)
+overview_row, navigation_row, metrics_row = ui.rows(3)
 
 table = overview_row.table({
     "Releases": [getReleasesCount()],
@@ -43,5 +43,11 @@ with col3:
     col3.board_link('dev/release.py', 'Releases')
 
 
-# m = Metric.filter('s.name == "token-usage-input"')
-# ui.line_chart(m, x='steps', y='values')
+metrics_row.header('Token Usage per User Session')
+
+all_metrics = Metric.filter('')
+line_chart = metrics_row.line_chart(all_metrics, x='steps', y='values')
+line_chart.group('column', ['name'])
+line_chart.group('row', ['container.hash'])
+
+
