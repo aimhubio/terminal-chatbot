@@ -18,11 +18,8 @@ def get_sessions(query = '', param = None):
 ##################
 
 def sessions_overview():
-    search = ui.form('Search')
-    version = search.text_input('')
+    # TODO: Add search here once the component is ready.
     query = ''
-    if version:
-        query = f'str(c.chatbot_version).startswith("{version}")'
 
     sessions = get_sessions(query)
 
@@ -38,7 +35,7 @@ def sessions_overview():
     }, {
         'username': lambda x: x if x is not None else '-',
         'time': lambda x: ui.text(datetime.fromtimestamp(x).strftime("%Y-%m-%d %H:%M:%S") if x is not None else '-'),
-        'open': lambda x: ui.board_link('sessions.py', 'Open', state={'session_hash': x}),
+        'open': lambda x: ui.board_link('prod_session.py', 'Open', state={'session_hash': x}),
         'release': lambda x: ui.board_link('development/release.py', 'Release Page', state={'version': x}),
     })
 

@@ -72,7 +72,7 @@ def sessions_overview():
         'release': [sess['params'].get('chatbot_version') for sess in sessions],
     }, {
         'time': lambda x: ui.text(datetime.fromtimestamp(x).strftime("%Y-%m-%d %H:%M:%S") if x is not None else '-'),
-        'open': lambda x: ui.board_link('sessions.py', 'Open', state={'session_hash': x}),
+        'open': lambda x: ui.board_link('dev/dev_session.py', 'Open', state={'session_hash': x}),
         'release': lambda x: ui.board_link('dev/release.py', 'Release Page', state={'version': x}),
     })
 

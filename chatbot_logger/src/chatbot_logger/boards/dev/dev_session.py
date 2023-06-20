@@ -1,6 +1,6 @@
 import json
 
-from chatbot_logger import Session, MessagesSequence
+from chatbot_logger import SessionDev, MessagesSequence
 from asp import Metric, SystemMetric
 
 
@@ -9,13 +9,13 @@ from asp import Metric, SystemMetric
 ##################
 
 def get_session(session_hash):
-    sessions = Session.filter(f'c.hash == "{session_hash}"')
+    sessions = SessionDev.filter(f'c.hash == "{session_hash}"')
     if sessions and len(sessions):
         return sessions[0]
     return None
 
 def get_sessions(query = '', param = None):
-    sessions = Session.filter(query)
+    sessions = SessionDev.filter(query)
     sessions = sorted(sessions, key=lambda sess: sess['params'].get('started') or 0, reverse=True)
     if param is not None:
         return [session.get(param) for session in sessions]
@@ -25,7 +25,7 @@ def get_sessions(query = '', param = None):
 
 def overview(session_hash):
     if not session_hash:
-        ui.text('Pick a session')
+        ui.text('Select a session')
         return
 
     session = get_session(session_hash)
@@ -33,7 +33,7 @@ def overview(session_hash):
         ui.text('Session not found')
         return
 
-    ui.header(f'Session "{session_hash}"')
+    ui.header(f'Dev Session "{session_hash}"')
     ui.subheader('Overview')
 
     ui.table({
