@@ -1,4 +1,5 @@
 from aim import Container, Sequence, Object
+from aimstack.asp import Run
 
 
 @Object.alias('chatbot_logger.Message')
@@ -32,7 +33,7 @@ class MessagesSequence(Sequence[Message]):
     pass
 
 
-class Session(Container):
+class Session(Run):
     pass
 
 
@@ -50,4 +51,3 @@ class Experiment(Container):
 
 class Release(Container):
     pass
-

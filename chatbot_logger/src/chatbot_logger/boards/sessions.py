@@ -1,7 +1,7 @@
 import json
 
 from chatbot_logger import Session, MessagesSequence
-from asp import Metric
+from asp import Metric, SystemMetric
 
 
 ##################
@@ -136,4 +136,12 @@ session_hash = ui.select(options=sessions, index=default_session)
 overview(session_hash)
 history(session_hash)
 session_cost(session_hash)
+
+ui.header('System Metrics')
+system_metrics = SystemMetric.filter('')
+lc = ui.line_chart(system_metrics, x='steps', y='values')
+lc.group('column', ['name'])
+
 user_info(session_hash)
+
+

@@ -54,6 +54,8 @@ class AimCallbackHandler(BaseCallbackHandler):
         else:
             self.session = SessionProd()
 
+        self.session.enable_system_monitoring()
+
         self.messages = MessagesSequence(self.session, name='messages', context={})
         self.tokens_usage_input = Metric(self.session, name='token-usage-input', context={})
         self.tokens_usage_output = Metric(self.session, name='token-usage-output', context={})

@@ -1,4 +1,4 @@
-from asp import Metric
+from asp import Metric, SystemMetric
 from chatbot_logger import Experiment, SessionProd, SessionDev, Release
 
 
@@ -55,4 +55,9 @@ line_chart = metrics_row.line_chart(all_metrics, x='steps', y='values')
 line_chart.group('column', ['name'])
 line_chart.group('row', ['container.hash'])
 
+metrics_row.header('System metrics across dev and prod sessions')
 
+system_metrics = SystemMetric.filter('')
+lc = metrics_row.line_chart(system_metrics, x='steps', y='values')
+lc.group('column', ['name'])
+lc.group('row', ['hash'])
