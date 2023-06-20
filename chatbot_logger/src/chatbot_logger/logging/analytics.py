@@ -1,5 +1,12 @@
 from aim import Container, Sequence, Object
 
+"""
+    Defines user action to be logged when using the chatbot.
+    This can easily reflect any notion of a user in a specific way.
+
+    This is a really simple setup to showcase Aim.
+
+"""
 
 @Object.alias('aim_qa_logger.UserAction')
 class UserAction(Object):

@@ -3,6 +3,16 @@ import json
 from chatbot_logger import SessionDev, MessagesSequence
 from asp import Metric, SystemMetric
 
+# FIXIT:
+# There is LOTS of repeat non-ui code in these files.
+# To be moved to "server functions" once its available (to be shipped as part of stable)
+
+# FIXIT:
+# There is lots of repeat UI code that should be moved into template.
+# This is exactly the same page as the prod_session.
+# In real world these would be different pages built on the same base.
+# We need to enable __init__.py in the UI folders so devs can precisely define what files get rendered and what become reusable templates.
+
 
 ##################
 # Utils
@@ -100,6 +110,13 @@ def session_cost(session_hash):
     line_chart = ui.line_chart(metrics, x='steps', y='values')
     line_chart.group('column', ['name'])
 
+
+def system_metrics(session_hash):
+    ui.header('System Metrics')
+    system_metrics = SystemMetric.filter(f'c.hash == "{session_hash}"')
+    line_chart = ui.line_chart(system_metrics, x='steps', y='values')
+    line_chart.group('column', ['name'])
+
 def user_info(session_hash):
     if not session_hash:
         return
@@ -136,12 +153,7 @@ session_hash = ui.select(options=sessions, index=default_session)
 overview(session_hash)
 history(session_hash)
 session_cost(session_hash)
-
-ui.header('System Metrics')
-system_metrics = SystemMetric.filter('')
-lc = ui.line_chart(system_metrics, x='steps', y='values')
-lc.group('column', ['name'])
-
+system_metrics(session_hash)
 user_info(session_hash)
 
 

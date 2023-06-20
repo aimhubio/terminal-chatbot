@@ -3,6 +3,27 @@ from datetime import datetime
 from chatbot_logger import Experiment, SessionDev, Release
 
 
+"""
+This is a key page in this logger.
+
+For long time we have been tracking code and its lineage as a way to make sure we have a complete picture of our software systems at any point in time.
+Tracking the code was enough as it would describe the system deterministically.
+
+The code however no longer deterministically describes the AI Systems.
+Data, external APIs, internal models make it harder to base our conviction on the code.
+The software development lifecycle is broken.
+So we should track the whole System.
+
+In this case System Lineage becomes a key artifact to track, observe and maintain so we can at any point know what is happening in our AI Systems.
+
+The questions of what System Lineage means and how it should be visualized are to become a key topic as we deploy more and more of the AI Systems and reliability, robustness, safety become critical issues.
+
+Aim fundamentally enables tracking of the relationships between all parts of the software and, retrieving them and visualizing them.
+This is an amazing journey of discovery of what it means to track and visualize the System Lineage.
+
+This specific view is just the start of it.
+"""
+
 ##################
 # Utils
 ##################

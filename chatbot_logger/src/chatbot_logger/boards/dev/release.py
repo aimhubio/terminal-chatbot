@@ -69,6 +69,8 @@ def release(release_version):
 # Page
 ##################
 
+# state is a dictionary that's available for each board.
+# Think of it as reactJS props that can be passed down to a component.
 try:
     release_version = state['dev/release.py']['version']
 except:

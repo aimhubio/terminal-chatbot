@@ -12,6 +12,28 @@ from chatbot_logger import (
 )
 from aimstack.asp import Metric
 
+"""
+An extended Aim callback handler for LangChain.
+This callback handler could easily be part of the chatbot_logger.
+
+That would be a more specialized chatbot logger for LangChain.
+But we have tried to keep it framework-agnostic.
+So it works with other chatbot implementations as well.
+These decisions are up to the developers.
+
+
+About this integration:
+
+There are three main building blocks in Aim logging:
+- Objects: a unit of data being saved. Ex. Number, Image, Text etc.
+- Sequences: a sequences of objects.
+- Containers: a set of interconnected sequences of objects
+
+These constructs enable a unique way of modeling all the relationships in the software being tracked.
+Below is an example of how such objects can be tracked and saved for LangChain.
+
+"""
+
 
 class AimCallbackHandler(BaseCallbackHandler):
     def __init__(
@@ -54,13 +76,24 @@ class AimCallbackHandler(BaseCallbackHandler):
         else:
             self.session = SessionProd()
 
+        # System metrics will be tracked by default.
         self.session.enable_system_monitoring()
 
-        self.messages = MessagesSequence(self.session, name='messages', context={})
-        self.tokens_usage_input = Metric(self.session, name='token-usage-input', context={})
-        self.tokens_usage_output = Metric(self.session, name='token-usage-output', context={})
-        self.tokens_usage = Metric(self.session, name='token-usage', context={})
+        # Define what needs to be tracked as a result of LangChain execution
+        self.messages = MessagesSequence(self.session, \
+            name='messages', context={})
 
+        self.tokens_usage_input = Metric(self.session, \
+            name='token-usage-input', context={})
+
+        self.tokens_usage_output = Metric(self.session, \
+            name='token-usage-output', context={})
+
+        self.tokens_usage = Metric(self.session, \
+            name='token-usage', context={})
+
+        # toy user actions implementation for demo purposes.
+        # TODO: Aim api should allow more efficient way of querying the specific user from Aim.
         for cont in self.repo.containers(None, UserActivity):
             if cont['username'] == self.username:
                 ua = cont
@@ -79,7 +112,7 @@ class AimCallbackHandler(BaseCallbackHandler):
         self.user_actions = user_actions
 
     def on_llm_start(
-            self, serialized: Dict[str, Any], prompts: List[str], **kwargs: Any
+        self, serialized: Dict[str, Any], prompts: List[str], **kwargs: Any
     ) -> None:
         """Run when LLM starts."""
         res = deepcopy(prompts)

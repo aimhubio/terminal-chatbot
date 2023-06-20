@@ -16,13 +16,38 @@ from chatbot.chatbot.utils import (
 )
 
 
+"""
+The Terminal Chatbot implementation
+
+Chatbot is run in two modes:
+- Dev: means llm experiments are being run and dev sessions are logged.
+    `chatbot run --dev`
+- Prod: prod run and user sessions are logged
+    `chatbot run`
+
+Every time a Dev session is created, Aim logs the LangChain config to Experiment.
+
+Every time a prod run is started, Aim takes the latest VERSION and uses that as the latest version and records user sessions based on that.
+With each prod run Aim also attaches the latest experiment to the release and creates the release object if it's a new release.
+
+All visible in the UI.
+The relationship between different parts of the software can be expressed in the logs here very organically. Then observed and queried programmatically.
+
+Reminder: this is a toy example to demonstrate Aim
+"""
+
 def chatbot(serpapi_key, openai_key, dev_mode):
     # Configs
     model_name = 'gpt-3.5-turbo'
     username = get_user()
     version = get_version()
 
-    # Init experiment and release
+
+
+    # TODO: this section may just as well be part of the chatbot_logger
+
+    # Initialize the release with the new version.
+    # REminder: this is a toy example to demonstrate Aim
     repo = Repo.default()
     try:
         release = repo.containers(f'c.version == "{version}"', Release).first()
@@ -39,6 +64,7 @@ def chatbot(serpapi_key, openai_key, dev_mode):
         experiment['release'] = release.hash
         experiment['version'] = version
         experiment['started'] = time.time()
+
 
     # ChatBot implementation
     memory = ConversationBufferMemory(memory_key="chat_history")

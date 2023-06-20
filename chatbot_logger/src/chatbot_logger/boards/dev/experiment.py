@@ -1,6 +1,16 @@
 from datetime import datetime
 from chatbot_logger import Experiment
 
+# FIXIT:
+# There is LOTS of repeat non-ui code in these files.
+# To be moved to "server functions" once its available (to be shipped as part of stable)
+
+# FIXIT:
+# There is lots of repeat UI code that should be moved into template.
+# This is exactly the same page as the one in release.
+# In real world these would be different pages built on the same base.
+# We need to enable __init__.py in the UI folders so devs can precisely define what files get rendered and what become reusable templates.
+
 
 ##################
 # Utils

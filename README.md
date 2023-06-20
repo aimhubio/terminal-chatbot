@@ -25,21 +25,22 @@
 ## Repo Structure
 This repo contains two python packages:
 - **chatbot**: the chatbot implementation with LangChain
-- **chatbot_logger**: end-to-end custome observability package for chatbot built with Aim framework.
+- **chatbot_logger**: end-to-end custom observability package for chatbot built with Aim framework.
 
 ## About Aim
-Aim is an easy-to-use open-source development framework for building AI Systems observability and automation.
+Aim is an open-source development framework for building AI Systems observability and automation.
 
-Aim enables three building blocks:
-- Define and Log AI metadata from everywhere in AI Infra into centralize
-- Build low-code custom observability for logged metadata
+Aim captures the relationships between different components of the System and enables these three capabilities:
+- Define and Log AI metadata from everywhere in AI Infra into centralized storage
+- Build low-code, composable custom observability for logged metadata
 - Build automations for logged metadata.
 
-The observability built with Aim is a new artifact in AI Systems - a composable custom observability & automation layer that deeply reflects the relationship between different components of the AI System.
+With this, Aim enables a new artifact - custom observability and automation layer for every AI System that captures all relevant relationships to fully show the System lineage, its evolution, its state as well as zoom-in zoom-out into every component of it. 
 
-Aim is composable. The building blocks can be packaged as python packages and reused across different projects.
+**Aim helps to recover the broken development lifecycle in AI Systems.**
 
-Such as `chatbot_logger`.
+Aim is python-composable. Aim building blocks can be packaged as python packages and reused across different projects.
+Both separately and all together. See the package `chatbot_logger` in this repo.
 
 Aim's mission is to democratize AI Dev tools to recover the broken AI Systems development lifecycle.
 

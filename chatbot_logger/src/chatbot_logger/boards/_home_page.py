@@ -50,6 +50,7 @@ with col_releases:
 
 metrics_row.header('Token Usage per User Session')
 
+# TODO: These metrics may not be fully useful by themselves. The in-progress server functions which enable registering specific functions in the logger and using it in the UI here, would allow lots of utilities such as creating the aggregate metrics of these.
 all_metrics = Metric.filter('')
 line_chart = metrics_row.line_chart(all_metrics, x='steps', y='values')
 line_chart.group('column', ['name'])
@@ -57,6 +58,7 @@ line_chart.group('row', ['container.hash'])
 
 metrics_row.header('System metrics across dev and prod sessions')
 
+# TODO: currently this just queries everything. We need to enable querying sequences by container so tht we can only show the Prod Session System metrics
 system_metrics = SystemMetric.filter('')
 lc = metrics_row.line_chart(system_metrics, x='steps', y='values')
 lc.group('column', ['name'])
