@@ -47,7 +47,7 @@ def experiment(exp_hash):
 ##################
 
 try:
-    exp_hash = state['development/experiment.py']['experiment_hash']
+    exp_hash = state['dev/experiment.py']['experiment_hash']
 except:
     exp_hash = ''
 

@@ -50,7 +50,7 @@ def experiments():
         'open': [sess['hash'] for sess in experiments],
     }, {
         'time': lambda x: ui.text(datetime.fromtimestamp(x).strftime("%Y-%m-%d %H:%M:%S") if x is not None else '-'),
-        'open': lambda x: ui.board_link('development/experiment.py', 'Experiment Page', state={'experiment_hash': x}),
+        'open': lambda x: ui.board_link('dev/experiment.py', 'Experiment Page', state={'experiment_hash': x}),
     })
 
 def sessions_overview():
@@ -73,7 +73,7 @@ def sessions_overview():
     }, {
         'time': lambda x: ui.text(datetime.fromtimestamp(x).strftime("%Y-%m-%d %H:%M:%S") if x is not None else '-'),
         'open': lambda x: ui.board_link('sessions.py', 'Open', state={'session_hash': x}),
-        'release': lambda x: ui.board_link('development/release.py', 'Release Page', state={'version': x}),
+        'release': lambda x: ui.board_link('dev/release.py', 'Release Page', state={'version': x}),
     })
 
 def releases():
@@ -92,14 +92,14 @@ def releases():
         'open': [sess['params'].get('version') for sess in releases],
     }, {
         'time': lambda x: ui.text(datetime.fromtimestamp(x).strftime("%Y-%m-%d %H:%M:%S") if x is not None else '-'),
-        'open': lambda x: ui.board_link('development/release.py', 'Open', state={'version': x}),
+        'open': lambda x: ui.board_link('dev/release.py', 'Open', state={'version': x}),
     })
 
 ##################
 # Page
 ##################
 
-ui.header('Development')
+ui.header('Chatbot System Lineage')
 
 releases()
 experiments()

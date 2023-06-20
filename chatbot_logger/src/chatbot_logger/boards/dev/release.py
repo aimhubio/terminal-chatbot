@@ -70,7 +70,7 @@ def release(release_version):
 ##################
 
 try:
-    release_version = state['development/release.py']['version']
+    release_version = state['dev/release.py']['version']
 except:
     release_version = ''
 
