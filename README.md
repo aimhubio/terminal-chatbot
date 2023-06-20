@@ -1,43 +1,51 @@
-# Chatbot app for terminal
+# The Terminal Chatbot app
 A basic implementation of a LangChain chatbot app operated from terminal.
 
-This project also includes end-to-end Aim observability package.
+This project is a demonstration of how Aim enables building an observability and automation artifact for every AI System.
 
-### Repo Structure
-There are two python packages in this repo:
+## What's in the repo
+### Structure
+This repo contains two python packages:
 - **chatbot**: the chatbot implementation with LangChain
 - **chatbot_logger**: end-to-end custome observability package for chatbot built with Aim framework.
 
 ### About Aim
 Aim is an easy-to-use open-source development framework for building AI Systems observability and automation.
 
-Aim enables the following:
+Aim enables three building blocks:
 - Define and Log AI metadata from everywhere in AI Infra into centralize
 - Build low-code custom observability for logged metadata
 - Build automations for logged metadata.
 
-These are the Aim building blocks.
+The observability built with Aim is a new artifact in AI Systems - a composable custom observability & automation layer that deeply reflects the relationship between different components of the AI System.
 
-Aim enables a new artifact in AI Systems - composable custom observability layer that deeply reflects the relationship between different components.
-Aim is fundamentally composable. The building blocks can be packaged as python packages and reused across different projects.
+Aim is composable. The building blocks can be packaged as python packages and reused across different projects.
+
 Such as `chatbot_logger`.
 
-Aim's mission is to democratize AI Dev tools and recover the broken AI Systems development lifecycle.
+Aim's mission is to democratize AI Dev tools to recover the broken AI Systems development lifecycle.
 
 ## Getting Started with the Chatbot
-### Installation
 
+### Installation
 1. Clone the repo
 2. Add `.env` file at `chatbot` with `serpapi_key` and `openai_key` keys
 2. Install the logger `pip install -e ./chatbot_logger` (in editable mode)
 3. Install the chatbot `pip install -e ./chatbot` (in editable mode)
 
-### Run
+### Chatbot usage and development
 
-1. Start Aim server `aim server --package chatbot_logger`
-2. Execute `cd chatbot && chatbot run` to run the chatbot
+There are two modes of chatbot iteration: Dev and Production.
+
+#### Production
+Execute `cd chatbot && chatbot run` to run the chatbot.
+Each chatbot run is a "production" run and uses the version number from `chatbot/VERSION` as its release version.
+
+#### Dev
+Execute `cd chatbot && chatbot run --dev` to run the chatbot
 
 ## Observability with Aim
+The chatbot_logger built with Aim tracks the chatbot both across development and production.
 
 ### Using Aim
 - Start Aim UI: `aim up --package chatbot_logger`
