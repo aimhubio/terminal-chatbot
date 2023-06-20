@@ -70,16 +70,35 @@ The chatbot_logger built with Aim tracks the chatbot both across development and
 - Checkout Aim docs: `aim up --port 43001 --package docs`
 
 ## The chatbot development toolkit
-- **Overview page:** full overview of the development and releases of the chatbot
-- **Production page:** full overview of the production sessions by the users 
-- **User Activity page:** select user and see the users' activity
-- **User Session page:** observe the User sessions on the chatbot in detail
-- **Logs Discovery page:** all the logs tracked by Aim.
+- **Chatbot System Lineage page:** full overview of the development and releases of the chatbot
+<div align="center">
+  <img width="918" src="https://github.com/alberttorosyan/langchain-chatbot/assets/3179216/328f8b10-b42c-4f9a-a8f0-b4f44c621e36">
+</div>
+
+- **Production Sessions page:** full overview of the production sessions by the users
+<div align="center">
+  <img width="918" src="https://github.com/alberttorosyan/langchain-chatbot/assets/3179216/a6a16d7f-81ba-436e-ae3d-b7cd8508a0e6">
+</div>
+
+- **User Analytics page:** select user and see the users' activity breakdown.
+<div align="center">
+  <img width="918" src="https://github.com/alberttorosyan/langchain-chatbot/assets/3179216/e3f0d6fe-62e4-424c-a5ed-4fb54554e486">
+</div>
+
+- **Production Session:** observe the User sessions on the chatbot in detail
+<div align="center">
+  <img width="918" src="https://github.com/alberttorosyan/langchain-chatbot/assets/3179216/ee050e2f-d3a6-47a3-82d7-79dfa0268d8a">
+</div>
 
 ## Using the built-in playground documentation
-Aim comes with a built-in playground documentation.
+Aim comes with a built-in playgroun
+d documentation.
 Here is how to start it: `aim up --port 43001 --package docs`
 This command will start an Aim instance that's also a playground documentation to experiment with and customize your toolkit.
+<div align="center">
+  <img width="918" src="https://github.com/alberttorosyan/langchain-chatbot/assets/3179216/24175479-339a-4797-aca7-0262eadd1bca">
+</div>
+
 
 ## Next steps: make it your own
 There are many ways this package can be extended
