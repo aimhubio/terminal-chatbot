@@ -67,6 +67,9 @@ Execute `cd chatbot && chatbot run --dev` to run the chatbot
 The chatbot_logger built with Aim tracks the chatbot both across development and production.
 
 ## Using Aim
+All commands run in dir `langchain-chatbot`
+- Start Aim server: `aim server --package chatbot_logger`
+  - Note: this command to be automatically ran with `aim up` in future iterations
 - Start Aim UI: `aim up --package chatbot_logger`
 - Checkout Aim docs: `aim up --port 43001 --package docs`
 
