@@ -2,6 +2,7 @@ __aim_boards__ = 'boards'
 
 from chatbot_logger.logging.chat import *
 from chatbot_logger.logging.analytics import *
+from chatbot_logger.logging.functions import *
 
 __all__ = [
     'Session', 'SessionProd', 'SessionDev',
@@ -15,5 +16,7 @@ __aim_types__ = [
     MessagesSequence, UserActivity, UserActions,
 ]
 
-for aim_type in __aim_types__:
-    setattr(aim_type, '__aim_package__', 'chatbot_logger')
+__aim_functions__ = [
+    get_release_by_version,
+    get_last_experiment
+]

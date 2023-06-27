@@ -1,6 +1,8 @@
 from datetime import datetime
 from chatbot_logger import Release, Experiment
 
+from chatbot_logger import get_release_by_version, get_last_experiment
+
 
 ##################
 # Utils
@@ -13,30 +15,14 @@ def get_releases(query = '', param = None):
         return [session.get(param) or session['params'].get(param) for session in sessions]
     return sessions
 
-def get_release(release_version):
-    sessions = Release.filter(f'c.version == "{release_version}"')
-    if sessions and len(sessions):
-        return sessions[0]
-    return None
-
-def get_last_experiment(release_version):
-    experiments = Experiment.filter(f'c.version == "{release_version}"')
-    last = None
-    for experiment in experiments:
-        if last is None or not last['params'].get('started'):
-            last = experiment
-            continue
-        if experiment['params'].get('started') and last['params']['started'] < experiment['params']['started']:
-            last = experiment
-    return last
 
 ##################
 
-def experiment(release_version):
+def render_experiment(release_version):
     if not release_version:
         return
 
-    exp = get_last_experiment(release_version)
+    exp = get_last_experiment(version=release_version)
     if not exp:
         ui.text('No experiment')
         return
@@ -56,8 +42,8 @@ def experiment(release_version):
     tools.json(exp['params'].get('tools'))
     agent.json(exp['params'].get('agent'))
 
-def release(release_version):
-    release = get_release(release_version)
+def render_release(release_version):
+    release = get_release_by_version(version=release_version)
     if not release:
         ui.text('Pick a release')
         return
@@ -80,5 +66,5 @@ releases = get_releases('', 'version')
 default_release = releases.index(release_version) if release_version != '' else 0
 release_version = ui.select(options=releases, index=default_release)
 
-release(release_version)
-experiment(release_version)
+render_release(release_version)
+render_experiment(release_version)
