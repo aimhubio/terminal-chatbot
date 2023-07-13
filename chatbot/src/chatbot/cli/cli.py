@@ -12,7 +12,10 @@ def entrypoint():
 
 @entrypoint.command
 @click.option('--dev', is_flag=True, default=False)
-def run(dev):
+@click.option('--repo', required=False,
+              default='aim://0.0.0.0:53800',
+              type=str)
+def run(dev, repo):
     # Load config
     here = os.path.abspath(os.path.dirname(__file__))
     config_file_path = os.path.abspath(os.path.join(here, '..', '..', '..', '.env'))
@@ -22,5 +25,6 @@ def run(dev):
     chatbot(
         serpapi_key=config['serpapi_key'],
         openai_key=config['openai_key'],
-        dev_mode=dev
+        dev_mode=dev,
+        repo_path=repo,
     )

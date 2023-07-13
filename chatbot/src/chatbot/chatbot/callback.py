@@ -41,12 +41,13 @@ class AimCallbackHandler(BaseCallbackHandler):
             username,
             dev_mode,
             experiment,
+            repo_path = 'aim://0.0.0.0:53800'
     ) -> None:
         """Initialize callback handler."""
 
         super().__init__()
 
-        self.repo = Repo.default()
+        self.repo = Repo.from_path(repo_path)
         self.session = None
         self.messages = None
         self.user_activity = None
@@ -72,9 +73,9 @@ class AimCallbackHandler(BaseCallbackHandler):
             return
 
         if self.dev_mode:
-            self.session = SessionDev()
+            self.session = SessionDev(repo=self.repo)
         else:
-            self.session = SessionProd()
+            self.session = SessionProd(repo=self.repo)
 
         # System metrics will be tracked by default.
         self.session.enable_system_monitoring()
@@ -104,7 +105,7 @@ class AimCallbackHandler(BaseCallbackHandler):
                     user_actions = UserActions(ua, name='user-actions', context={})
                 break
         else:
-            ua = UserActivity()
+            ua = UserActivity(repo=self.repo)
             ua['username'] = self.username
             user_actions = UserActions(ua, name='user-actions', context={})
 
