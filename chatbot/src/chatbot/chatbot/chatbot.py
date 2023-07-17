@@ -36,7 +36,7 @@ The relationship between different parts of the software can be expressed in the
 Reminder: this is a toy example to demonstrate Aim
 """
 
-def chatbot(serpapi_key, openai_key, dev_mode):
+def chatbot(serpapi_key, openai_key, dev_mode, repo_path):
     # Configs
     model_name = 'gpt-3.5-turbo'
     username = get_user()
@@ -48,11 +48,11 @@ def chatbot(serpapi_key, openai_key, dev_mode):
 
     # Initialize the release with the new version.
     # REminder: this is a toy example to demonstrate Aim
-    repo = Repo.default()
+    repo = Repo.from_path(repo_path)
     try:
         release = repo.containers(f'c.version == "{version}"', Release).first()
     except:
-        release = Release()
+        release = Release(repo=repo)
         release[...] = {
             'version': version,
             'time': time.time(),
@@ -60,7 +60,7 @@ def chatbot(serpapi_key, openai_key, dev_mode):
 
     experiment = None
     if dev_mode:
-        experiment = Experiment()
+        experiment = Experiment(repo=repo)
         experiment['release'] = release.hash
         experiment['version'] = version
         experiment['started'] = time.time()
@@ -97,7 +97,7 @@ def chatbot(serpapi_key, openai_key, dev_mode):
         experiment['agent'] = agent_chain.__dict__
 
     # Init the callback
-    aim_cb = AimCallbackHandler(username, dev_mode, experiment)
+    aim_cb = AimCallbackHandler(username, dev_mode, experiment, repo_path)
     aim_cb.session[...] = {
         'chatbot_version': version,
         'model': model_name,
