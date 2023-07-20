@@ -64,24 +64,22 @@ def history(session_hash):
     ui.subheader('History')
 
     qa_sequences = MessagesSequence.filter(f's.name == "messages" and c.hash == "{session_hash}"')
-    qa_sequence = None
+    
     if qa_sequences and len(qa_sequences):
-        qa_sequence = qa_sequences[0]
-
-    if qa_sequence is not None:
-        values = qa_sequence['values']
         history_table = ui.table({
-            'question': [r['question'] for r in values],
-            'answer': [r['answer'] for r in values],
-            'index': [step for (step, _) in enumerate(values)],
+            'question': [r['question'] for r in qa_sequences],
+            'answer': [r['answer'] for r in qa_sequences],
+            'index': [step for (step, _) in enumerate(qa_sequences)],
         })
 
         if history_table.focused_row:
             ui.subheader('Agent actions')
             step = history_table.focused_row['index']
-            ui.json(values[step])
+            ui.json(qa_sequences[step])
+    
     else:
         ui.text('No message history')
+        
 
 def session_cost(session_hash):
     if not session_hash:

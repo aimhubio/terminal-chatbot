@@ -74,17 +74,17 @@ def user_sessions(username):
     timestamps = [session['params'].get('started') or 0 for session in all_user_sessions]
     if not timestamps:
         return
+    
+    controls_row = ui.rows(1)[0]
 
-    ui.text('Breakdown by:')
-    breakdown_type = ui.toggle_button(left_value='Days', right_value='Hours')
+    breakdown_type = controls_row.toggle_button('Breakdown by:', left_value='Days', right_value='Hours')
 
     if breakdown_type == 'Hours':
         data = hourly_count(timestamps)
     else:
         data = daily_count(timestamps)
 
-    ui.text('Visualize via:')
-    vis_tye = ui.toggle_button(left_value='Table', right_value='Chart')
+    vis_tye = controls_row.toggle_button('Visualize via:', left_value='Table', right_value='Chart')
 
     if vis_tye == 'Table':
         ui.table(data)
