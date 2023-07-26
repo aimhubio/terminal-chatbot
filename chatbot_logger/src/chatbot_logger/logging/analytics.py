@@ -1,4 +1,4 @@
-from aim import Container, Sequence, Object
+from aim import Container, Sequence, Record
 
 """
     Defines user action to be logged when using the chatbot.
@@ -8,8 +8,8 @@ from aim import Container, Sequence, Object
 
 """
 
-@Object.alias('aim_qa_logger.UserAction')
-class UserAction(Object):
+@Record.alias('aim_qa_logger.UserAction')
+class UserAction(Record):
     AIM_NAME = 'aim_qa_logger.UserAction'
 
     def __init__(self, action_type: str):
