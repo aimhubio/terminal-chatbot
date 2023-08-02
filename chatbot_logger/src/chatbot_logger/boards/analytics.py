@@ -108,8 +108,12 @@ except:
     username = ''
 
 users = get_users('', 'username')
-default_user = users.index(username) if username != '' else 0
-username = ui.select(options=users, index=default_user)
+if users:
+    default_user = users.index(username) if username != '' else 0
+    username = ui.select(options=users, index=default_user)
 
-overview(username)
-user_sessions(username)
+if username:
+    overview(username)
+    user_sessions(username)
+else:
+    ui.header('No users')

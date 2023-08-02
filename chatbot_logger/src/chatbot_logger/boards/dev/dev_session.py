@@ -145,13 +145,15 @@ except:
     session_hash = ''
 
 sessions = get_sessions('', 'hash')
-default_session = sessions.index(session_hash) if session_hash != '' else 0
-session_hash = ui.select(options=sessions, index=default_session)
+if sessions:
+    default_session = sessions.index(session_hash) if session_hash != '' else 0
+    session_hash = ui.select(options=sessions, index=default_session)
 
-overview(session_hash)
-history(session_hash)
-session_cost(session_hash)
-system_metrics(session_hash)
-user_info(session_hash)
-
-
+if session_hash:
+    overview(session_hash)
+    history(session_hash)
+    session_cost(session_hash)
+    system_metrics(session_hash)
+    user_info(session_hash)
+else:
+    ui.header('No dev sessions')
