@@ -1,4 +1,4 @@
-from aim import Container, Sequence, Object
+from aim import Container, Sequence, Record
 from aimstack.asp import Run
 
 
@@ -7,8 +7,8 @@ from aimstack.asp import Run
     To be logged as part of the chatbot usage sessions
 """
 
-@Object.alias('chatbot_logger.Message')
-class Message(Object):
+@Record.alias('chatbot_logger.Message')
+class Message(Record):
     AIM_NAME = 'chatbot_logger.Message'
 
     def __init__(self, question: str, answer: str, steps: list):
